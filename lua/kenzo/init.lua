@@ -1,2 +1,2 @@
-require("kenzo.remap")
 require("kenzo.set")
+require("kenzo.remap")
