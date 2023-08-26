@@ -11,6 +11,7 @@ return {
             -- Autocompletion
             {'hrsh7th/nvim-cmp'},         -- Required
             {'hrsh7th/cmp-nvim-lsp'},     -- Required
+            {'kdheepak/cmp-latex-symbols'},     -- Required
 
             -- Snippets
             {'L3MON4D3/LuaSnip'},             -- Required
@@ -36,7 +37,10 @@ return {
                 window = {
                     completion = cmp.config.window.bordered(),
                     documentation = cmp.config.window.bordered(),
-                }
+                },
+                sources =  cmp.config.sources({
+                    {name = "latex_symbols",}
+                })
             })
 
             require('mason').setup()
