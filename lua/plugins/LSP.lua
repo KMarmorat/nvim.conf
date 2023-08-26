@@ -19,6 +19,7 @@ return {
 
         config = function()
             local lsp = require('lsp-zero').preset()
+
             lsp.on_attach(function(client, bufnr)
                 -- see :help lsp-zero-keybindings
                 -- to learn the available actions
