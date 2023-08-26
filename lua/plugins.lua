@@ -1,8 +1,6 @@
 return {
     {
         "cljoly/bepo.nvim",
-		config = true
-        
     },
     {
         "nvim-treesitter/nvim-treesitter",
