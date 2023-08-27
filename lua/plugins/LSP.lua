@@ -1,7 +1,7 @@
 return {
     {
         'VonHeikemen/lsp-zero.nvim',
-          branch = 'v2.x',
+        branch = 'v2.x',
         dependencies = {
             -- LSP Support
             {'neovim/nvim-lspconfig'},             -- Required
@@ -33,6 +33,7 @@ return {
             cmp.setup({
                 mapping = {
                     ['<CR>'] = cmp.mapping.confirm({select = false}),
+                    ['<TAB>'] = cmp.mapping.confirm({select = true}),
                 },
                 window = {
                     completion = cmp.config.window.bordered(),
