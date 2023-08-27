@@ -12,7 +12,7 @@ return {
                 ensure_installed = { "c", "lua", "vim", "vimdoc", "julia" },
                 sync_install = false,
                 highlight = { enable = true },
-                indent = { enable = true, disable = { "yaml" } },
+                indent = { enable = true, disable = { "yaml" , "julia" } },
                 rainbow = {
                     enable = true,
                     -- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
@@ -24,14 +24,14 @@ return {
             })
         end
     },
-    { 
+    {
         "catppuccin/nvim",
         priority = 1000,
         config = function ()
             vim.cmd.colorscheme "catppuccin"
         end
     },
-    { 
+    {
         "lukas-reineke/indent-blankline.nvim",
         config = true
     },

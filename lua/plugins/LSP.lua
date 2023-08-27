@@ -11,49 +11,49 @@ return {
             -- Autocompletion
             {'hrsh7th/nvim-cmp'},         -- Required
             {'hrsh7th/cmp-nvim-lsp'},     -- Required
-            {'kdheepak/cmp-latex-symbols'},     -- Required
+            {'hrsh7th/cmp-nvim-lua'},     -- Required
+            {'hrsh7th/cmp-path'},         -- Required
+            {'hrsh7th/cmp-buffer'},       -- Required
+            {'saadparwaiz1/cmp_luasnip'},       -- Required
+            {'kdheepak/cmp-latex-symbols'},
 
             -- Snippets
             {'L3MON4D3/LuaSnip'},             -- Required
+            
+            --autopairs
+            {'windwp/nvim-autopairs'},
         },
 
 
         config = function()
-            local lsp = require('lsp-zero').preset()
-
+            local lsp = require('lsp-zero').preset({'recommended'})
             lsp.on_attach(function(client, bufnr)
-                -- see :help lsp-zero-keybindings
-                -- to learn the available actions
-                lsp.default_keymaps({buffer = bufnr})
+              lsp.default_keymaps({buffer = bufnr})
             end)
 
-            -- (Optional) Configure lua language server for neovim
-            require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
-            local cmp = require('cmp')
-            cmp.setup({
-                mapping = {
-                    ['<CR>'] = cmp.mapping.confirm({select = false}),
-                    ['<TAB>'] = cmp.mapping.confirm({select = true}),
-                },
-                window = {
-                    completion = cmp.config.window.bordered(),
-                    documentation = cmp.config.window.bordered(),
-                },
-                sources =  cmp.config.sources({
-                    {name = "latex_symbols",}
-                })
+            lsp.setup()
+
+            -- Make sure you setup `cmp` after lsp-zero
+            require("nvim-autopairs").setup({
+                map_cr = true,
+                map_complete = true,
+                auto_select = true
             })
 
-            require('mason').setup()
-            require('mason-lspconfig').setup({
-                -- Replace the language servers listed here
-                -- with the ones you want to install
-                ensure_installed = {'rust_analyzer',"julials"},
-                handlers = {
-                    lsp.default_setup,
+            local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+
+            local cmp = require('cmp')
+            local cmp_action = require('lsp-zero').cmp_action()
+
+            cmp.setup({
+                mapping = {
+                    ['tf'] = cmp_action.luasnip_jump_forward(),
+                    ['tp'] = cmp_action.luasnip_jump_backward(),
+                    ['<CR>'] = cmp.mapping.confirm({select = false}),
+                    ['<Tab>'] = cmp.mapping.confirm({select = true}),
                 }
             })
-            lsp.setup()
+            cmp.event:on('confirm_done',cmp_autopairs.on_confirm_done())
         end
         },
     }
