@@ -1,8 +1,5 @@
 return {
     {
-        "cljoly/bepo.nvim",
-    },
-    {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         config = function () 

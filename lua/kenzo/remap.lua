@@ -1,2 +1,1 @@
-require("bepo").setup()
-vim.keymap.set("n","<leader>pv",vim.cmd.Explore)
+vim.keymap.set("n","<leader>pl",vim.cmd.Explore)
